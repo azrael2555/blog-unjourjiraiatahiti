@@ -1,0 +1,53 @@
+---
+const { title, description } = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { font-family: 'Segoe UI', sans-serif; color: #1a1a2e; }
+      header {
+        background: #1a3a5c;
+        padding: 1rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      header a { color: white; text-decoration: none; font-weight: bold; }
+      header nav a { margin-left: 2rem; font-size: 0.95rem; }
+      main { max-width: 900px; margin: 0 auto; padding: 2rem; }
+      footer {
+        text-align: center;
+        padding: 2rem;
+        background: #1a3a5c;
+        color: white;
+        margin-top: 4rem;
+      }
+      footer a { color: #7ecbff; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <a href="https://unjourjiraiatahiti.fr">🌺 Un jour j'irai à Tahiti</a>
+      <nav>
+        <a href="https://unjourjiraiatahiti.fr">Nos Voyages</a>
+        <a href="/blog">Blog</a>
+        <a href="https://infotahiti.fr">Infos Polynésie</a>
+      </nav>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer>
+      <p>© 2026 Un jour j'irai à Tahiti — 
+        <a href="https://infotahiti.fr">infotahiti.fr</a> — 
+        Le guide complet de la Polynésie française
+      </p>
+    </footer>
+  </body>
+</html>
