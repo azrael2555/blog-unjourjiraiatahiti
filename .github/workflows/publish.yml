@@ -1,0 +1,29 @@
+name: Publish from Notion
+
+on:
+  schedule:
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Install dependencies
+        run: npm install @notionhq/client
+      - name: Fetch articles from Notion
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          NOTION_DATABASE_ID: d23ee70b-3634-4baa-af6f-6be694f3da1b
+        run: node scripts/fetch-notion.js
+      - name: Commit and push
+        run: |
+          git config --global user.email "blog@unjourjiraiatahiti.fr"
+          git config --global user.name "Blog Bot"
+          git add .
+          git diff --staged --quiet || git commit -m "Nouveaux articles depuis Notion"
+          git push
