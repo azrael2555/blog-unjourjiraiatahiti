@@ -1,6 +1,6 @@
-const { Client } = require('@notionhq/client');
-const fs = require('fs');
-const path = require('path');
+import { Client } from '@notionhq/client';
+import fs from 'fs';
+import path from 'path';
 
 const notion = new Client({ auth: process.env.NOTION_TOKEN });
 const DATABASE_ID = process.env.NOTION_DATABASE_ID;
@@ -41,7 +41,6 @@ ${contenu}
     fs.writeFileSync(path.join(dir, `${slug}.md`), markdown);
     console.log(`✅ Article créé : ${slug}.md`);
 
-    // Marquer comme Publié dans Notion
     await notion.pages.update({
       page_id: page.id,
       properties: {
